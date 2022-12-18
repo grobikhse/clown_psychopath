@@ -5,8 +5,8 @@ from random import choice
 bot = telebot.TeleBot(' ')
 
 
-bots = '🤪'  # задаю игровые параметры
-players = '🤡'
+bots = '\U0001F92A'  # задаю игровые параметры
+players = '\U0001F921'
 size = 3
 field = None
 keyboard = None
@@ -44,10 +44,10 @@ class GameField: # в этом классе создается поле,
     def check_wincons(self):  # проверка условий выигрыша клоунов или психопатов
         wincons = self.grid + self.get_cols() + self.get_diags()
         # print(wincons)
-        if ['🤡'] * (self.size) in wincons:
-            return '🤡'
-        if ['🤪'] * (self.size) in wincons:
-            return '🤪'
+        if ['\U0001F921'] * (self.size) in wincons:
+            return '\U0001F921'
+        if ['\U0001F92A'] * (self.size) in wincons:
+            return '\U0001F92A'
         return None
 
     def is_vacant(self, x, y): # если клетка не занята, то там, удивительно, пустота
@@ -96,7 +96,7 @@ def get_text_messages(message):
     elif message.text == "/help": #ну в чем тут может быть нужна помощь, просто на старт нажми, ей-богу
         bot.send_message(message.from_user.id, "Type /start to start")
     keyboard = types.InlineKeyboardMarkup() #человек должен стать клоуном или психопатом
-    keyboard.row(types.InlineKeyboardButton('🤡', callback_data='🤡'), types.InlineKeyboardButton('🤪', callback_data='🤪'))
+    keyboard.row(types.InlineKeyboardButton('\U0001F921', callback_data='\U0001F921'), types.InlineKeyboardButton('\U0001F92A', callback_data='\U0001F92A'))
     bot.send_message(message.from_user.id, "Выберите свою сторону.", reply_markup=keyboard)
 
 
@@ -108,15 +108,15 @@ def callbackInline(call):  # вот тут и происходит сражен�
         global field
         global vacant_fields
 
-        if call.data in ['🤡', '🤪']:
+        if call.data in ['\U0001F921', '\U0001F92A']:
             global players
             global bots
 
             players = call.data
-            bots = '🤪' if players == '🤡' else '🤡'
+            bots = '\U0001F92A' if players == '\U0001F921' else '\U0001F921'
 
             buttons, keyboard = new_game(buttons, keyboard)
-            if player_symbol == '🤪':  # первый ход делает бот, если игрок играет за психопата
+            if player_symbol == '\U0001F92A':  # первый ход делает бот, если игрок играет за психопата
                 random_cell = choice(vacant_fields)
                 print(random_cell)
                 field.make_move(*random_cell, bots) # бот беспощадно рандомит
