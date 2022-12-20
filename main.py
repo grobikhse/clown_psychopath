@@ -116,7 +116,7 @@ def callbackInline(call):  # вот тут и происходит сражен�
             bots = '\U0001F92A' if players == '\U0001F921' else '\U0001F921'
 
             buttons, keyboard = new_game(buttons, keyboard)
-            if player_symbol == '\U0001F92A':  # первый ход делает бот, если игрок играет за психопата
+            if players == '\U0001F92A':  # первый ход делает бот, если игрок играет за психопата
                 random_cell = choice(vacant_fields)
                 print(random_cell)
                 field.make_move(*random_cell, bots) # бот беспощадно рандомит
