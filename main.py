@@ -130,14 +130,11 @@ def callbackInline(call):  # вот тут и происходит сражен�
                 vacant_fields.remove([x, y])
                 if field.check_wincons() == players:
                     buttons, keyboard = build_buttons(buttons, keyboard)  # обновление кнопок
-                    bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                          text="Game has ended",
-                                          reply_markup=keyboard)  # редактируем сообщение с игровым полем
+                    bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Game has ended", reply_markup=keyboard)  # редактируем сообщение с игровым полем
                     bot.send_message(call.message.chat.id, "Вы выиграли.")
                     bot.send_message(call.message.chat.id, "To start new game send /start")
                 elif not vacant_fields:  # если кончились пустые поля, но игрок не победил после своего хода — ничья
-                    bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                          text="Игра окончена.", reply_markup=keyboard)
+                    bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Игра окончена.", reply_markup=keyboard)
                     bot.send_message(call.message.chat.id, "Победила дружба.")
                     bot.send_message(call.message.chat.id, "To start new game send /start")
                 else:
@@ -148,21 +145,17 @@ def callbackInline(call):  # вот тут и происходит сражен�
                     vacant_fields.remove(random_cell)
                     if field.check_wincons() == bots:  # проверяется, победил ли бот
                         buttons, keyboard = build_buttons(buttons, keyboard)
-                        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                              text="Игра окончена.", reply_markup=keyboard)
+                        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Игра окончена.", reply_markup=keyboard)
                         bot.send_message(call.message.chat.id, "Вы проиграли.")
                         bot.send_message(call.message.chat.id, "To start new game send /start")
                     elif not vacant_fields:  # не опять, а снова проверка на ничью
                         buttons, keyboard = build_buttons(buttons, keyboard)
-                        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                              text="Игра окончена.", reply_markup=keyboard)
+                        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Игра окончена.", reply_markup=keyboard)
                         bot.send_message(call.message.chat.id, "Победила дружба.")
                         bot.send_message(call.message.chat.id, "To start new game send /start")
                     else:
-                        buttons, keyboard = build_buttons(buttons,
-                                                          keyboard)  # если никто не победил и есть свободные поля, то игра продолжается
-                        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id,
-                                              text="Выберите свою сторону.", reply_markup=keyboard)
+                        buttons, keyboard = build_buttons(buttons, keyboard)  # если никто не победил и есть свободные поля, то игра продолжается
+                        bot.edit_message_text(chat_id=call.message.chat.id, message_id=call.message.message_id, text="Выберите свою сторону.", reply_markup=keyboard)
 
             print(field.as_string())
 
